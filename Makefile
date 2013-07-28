@@ -1,4 +1,4 @@
-# Hashes Libraray Makefile
+# Hashes Library Makefile
 
 all: common Encryptions Hashes
 
