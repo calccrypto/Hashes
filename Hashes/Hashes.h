@@ -1,3 +1,4 @@
+/*
 A library of cryptographic hashing alogorithms
 by Jason Lee @ calccrypto at gmail.com
 
@@ -67,3 +68,30 @@ Notes:
     I have no idea how the unhashed data is stored in other
     implementations so each instance just holds a copy of all
     the data inputted into it and rehashes everything every time.
+*/
+
+#ifndef HASHES_H
+#define HASHES_H
+
+#include "common/cryptomath.h"
+#include "common/includes.h"
+#include "Hash.h"
+
+#include "LM.h"
+#include "MD2.h"
+#include "MD4.h"
+#include "MD5.h"
+#include "RIPEMD128.h"
+#include "RIPEMD160.h"
+#include "SHA1.h"
+#include "SHA256.h"
+#include "SHA224.h"
+#include "SHA512.h"
+#include "SHA384.h"
+
+#include "HMAC.h"
+#include "POLY1305AES.h"
+
+bool validate_hash(std::ostream & stream = null_out, bool poly1305aes_test3 = false);
+
+#endif
