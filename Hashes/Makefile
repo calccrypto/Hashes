@@ -1,7 +1,7 @@
 # Hashes Makefile
 
 CC=g++
-LFLAGS=
+LFLAGS=-lgmpxx -lgmp
 CFLAGS=-std=c++11 -Wall -c
 
 all: Hash.o Hashes.o LM.o MD2.o MD4.o MD5.o POLY1305AES.o RIPEMD128.o RIPEMD160.o SHA1.o SHA224.o SHA256.o SHA2_Functions.o SHA384.o SHA512.o
@@ -27,8 +27,8 @@ MD4.o: MD4.cpp MD4.h ../common/cryptomath.h ../common/includes.h MD4_Const.h
 MD5.o: MD5.cpp MD5.h ../common/cryptomath.h ../common/includes.h MD5_Const.h
 	$(CC) $(CFLAGS) MD5.cpp
 
-POLY1305AES.o: POLY1305AES.cpp POLY1305AES.h ../common/cryptomath.h ../common/includes.h ../common/integer.h ../Encryptions/AES.h
-	$(CC) $(CFLAGS) POLY1305AES.cpp
+POLY1305AES.o: POLY1305AES.cpp POLY1305AES.h ../common/cryptomath.h ../common/includes.h ../Encryptions/AES.h
+	$(CC) $(CFLAGS) $(LFLAGS) POLY1305AES.cpp
 
 RIPEMD128.o: RIPEMD128.cpp RIPEMD128.h ../common/cryptomath.h ../common/includes.h Hash.h RIPEMD_Const.h RIPEMD128_Const.h
 	$(CC) $(CFLAGS) RIPEMD128.cpp

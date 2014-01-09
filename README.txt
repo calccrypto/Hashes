@@ -1,4 +1,4 @@
-A library of cryptographic hashing alogorithms
+A library of cryptographic hashing algorithms
 by Jason Lee @ calccrypto at gmail.com
 
 Please see LICENSE file for license.
@@ -7,13 +7,13 @@ IMPORTANT:
     This library was not written for actual use.
     Rather, it was meant for educational purposes,
     so if you choose to use it in a real setting
-    where secrecy is requied, do so at your own risk.
+    where secrecy is required, do so at your own risk.
     People who use this library to learn about the
     algorithms can easily add a few std::couts to
     see the internal data.
 
 Hashes:
-    Microsofts' LM Hash
+    Microsoft's LM Hash
     MD2
     MD4
     MD5
@@ -30,27 +30,16 @@ MACs
     POLY1305AES
 
 Build:
-    My encryptions library is also needed. Download at:
-    https://github.com/calccrypto/Encryptions
+    make
 
-    Just copy the Encryptions folder into where the Hashes
-    folder is:
+    or
 
-        Hashes/common
-        Hashes/Encryptions
-        Hashes/Hashes
+    g++ -std=c++11 main.cpp common/*.cpp Encryptions/*.cpp Hashes/*.cpp -lgmpxx -lgmp
 
+    or some equivalent
 
-	make (creates the object files only)
-
-	or
-
-	g++ -std=c++11 main.cpp common/*.cpp Encryptions/*.cpp Hashes/*.cpp
-
-	or some equivalent
-
-	You have to provide the main function/file since this is a library,
-	not a fully functioning program.
+You have to provide the main function/file since this is a library,
+not a fully functioning program.
 
 Usage:
     Ex:
@@ -64,8 +53,15 @@ Usage:
             instance.update(more data)
 
 Notes:
-    The format was inspired by the Python 2.7 hashlib module
+    The GNU Multiple Precision Arithmetic Library (GMP) is needed
+    for POly1305-Aes (gmp.org, sudo apt-get install libdev-gmp, or 
+    equivalent).
 
-    I have no idea how the unhashed data is stored in other
-    implementations so each instance just holds a copy of all
-    the data inputted into it and rehashes everything every time.
+    My Encryptions library is needed for this library. It is included 
+    in this project. My integer library is also needed, but only for 
+    Encryptions mode-of-operation functions, so it is possible to not 
+    need integer.
+
+    The format was inspired by the Python 2.7 hashlib module 
+
+    Hashes.h provides a quick test to check that the algorithms are correct.

@@ -2,7 +2,7 @@
 
 all: common Encryptions Hashes
 
-.PHONY: common Encryptions
+.PHONY: common Encryptions Hashes
 
 common:
 	$(MAKE) -C common
@@ -14,4 +14,6 @@ Hashes:
 	$(MAKE) -C Hashes
 
 clean:
-	rm -f common/*.o Encryptions/*.o Hashes/*.o
+	$(MAKE) -C common clean
+	$(MAKE) -C Encryptions clean
+	$(MAKE) -C Hashes clean

@@ -1,33 +1,35 @@
 #include "./POLY1305AES.h"
 
 POLY1305AES::POLY1305AES(const std::string & R, const std::string & NONCE){
-    r = integer(little_end(zfill(hexlify(R), 32).substr(0, 32), 16), 16);
+    r = mpz_class(little_end(zfill(hexlify(R), 32).substr(0, 32), 16), 16);
     nonce = zfill(NONCE, 16, zero).substr(0, 16);
-    mod1305.fill(130);
-    mod1305 -= 4;
+    mod1305 = mpz_class("3fffffffffffffffffffffffffffffffb", 16);
 }
 
-void POLY1305AES::HASH(std::string KEY, std::string MESSAGE){
-    KEY = zfill(KEY, 16, zero).substr(0, 16);
-    std::string aes = little_end(hexlify(AES(KEY).encrypt(nonce)));
-    unsigned int q = (MESSAGE.size() >> 4) + (bool) (MESSAGE.size() & 15);
-    MESSAGE = hexlify(MESSAGE);
+void POLY1305AES::HASH(const std::string & key, const std::string & message){
+    std::string aes = little_end(hexlify(AES(zfill(key, 16, zero).substr(0, 16)).encrypt(nonce)), 16);
+    unsigned int q = (message.size() >> 4) + (bool) (message.size() & 15);
     std::vector <std::string> m;
-    while (MESSAGE.size() >= 32){
-        m.push_back("1" + little_end(MESSAGE.substr(0, 32), 16));
-        MESSAGE = MESSAGE.substr(32, MESSAGE.size() - 32);
+    unsigned int x = 0;
+    while ((message.size() - x) >= 16){
+        m.push_back("1" + little_end(hexlify(message.substr(x, 16)), 16));
+        x += 16;
     }
-    if (MESSAGE.size())
-        m.push_back(zfill("1" + little_end(MESSAGE, 16), 33));
-    integer h(aes, 16);
+    if (message.size()){
+        m.push_back(zfill("1" + little_end(hexlify(message.substr(x, 16)), 16), 33));
+    }
+
+    mpz_class h(aes, 16);
     for(unsigned int x = 0; x < q; x++){
-        h += integer(m[x], 16) * POW(r, integer(q - x));
+        mpz_class temp; mpz_pow_ui(temp.get_mpz_t(), r.get_mpz_t(), q - x);
+        h += mpz_class(m[x], 16) * temp;
     }
     h %= mod1305;
-    std::deque <uint8_t> final = h.data();
-    while (final.size() > 16)
-        final.pop_front();
-    H = little_end(makehex(integer(final), 32), 16);
+
+    mpz_class mask("ffffffffffffffffffffffffffffffff", 16);
+    mpz_and(mask.get_mpz_t(), mask.get_mpz_t(), h.get_mpz_t());
+    H = mask.get_str(16);
+    H = little_end(H, 16);
 }
 
 std::string POLY1305AES::hexdigest(){

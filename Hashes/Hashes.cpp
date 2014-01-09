@@ -1,6 +1,6 @@
 #include "./Hashes.h"
 
-bool validate_hash(std::ostream & stream, bool poly1305aes_test3){
+bool validate_hash(std::ostream & stream){
     bool all_correct = true, correct;
 
     // No input == empty string == ""
@@ -100,37 +100,36 @@ bool validate_hash(std::ostream & stream, bool poly1305aes_test3){
     all_correct &= correct;
 
     stream << "Others:" << std::endl;
-    data = unhexlify("");
-    std::string key = unhexlify("75deaa25c09f208e1dc4ce6b5cad3fbf");
-    std::string r = unhexlify("a0f3080000f46400d0c7e9076c834403");
-    std::string nonce = unhexlify("61ee09218d29b0aaed7e154a2c5509cc");
-    POLY1305AES p1(r, nonce);
-    p1.HASH(key, data);
-    correct = (p1.hexdigest() == "dd3fab2251f11ac759f0887129cc2ee7");
-    stream << "   POLY1305AES TEST 1:\t" << (correct?"Passed":"Failed") << std::endl;
-    all_correct &= correct;
 
     data = unhexlify("f3f6");
-    key = unhexlify("ec074c835580741701425b623235add6");
-    r = unhexlify("851fc40c3467ac0be05cc20404f3f700");
-    nonce = unhexlify("fb447350c4e868c52ac3275cf9d4327e");
-    POLY1305AES p2(r, nonce);
-    p2.HASH(key, data);
-    correct = (p2.hexdigest() == "f4c633c3044fc145f84f335cb81953de");
-    stream <<  "   POLY1305AES TEST 2:\t" << (correct?"Passed":"Failed") << std::endl;;
+    std::string key = unhexlify("ec074c835580741701425b623235add6");
+    std::string r = unhexlify("851fc40c3467ac0be05cc20404f3f700");
+    std::string nonce = unhexlify("fb447350c4e868c52ac3275cf9d4327e");
+    POLY1305AES p1(r, nonce);
+    p1.HASH(key, data);
+    correct = (p1.hexdigest() == "f4c633c3044fc145f84f335cb81953de");
+    stream <<  "   POLY1305AES TEST 1:\t" << (correct?"Passed":"Failed") << std::endl;;
     all_correct &= correct;
 
-    if (poly1305aes_test3){
-        data = unhexlify("ab0812724a7f1e342742cbed374d94d136c6b8795d45b3819830f2c04491faf0990c62e48b8018b2c3e4a0fa3134cb67fa83e158c994d961c4cb21095c1bf9");
-        key = unhexlify("e1a5668a4d5b66a5f68cc5424ed5982d");
-        r = unhexlify("12976a08c4426d0ce8a82407c4f48207");
-        nonce = unhexlify("9ae831e743978d3a23527c7128149e3a");
-        POLY1305AES p3(r, nonce);
-        p3.HASH(key, data);
-        correct = (p3.hexdigest() == "5154ad0d2cb26e01274fc51148491f1b");
-        stream << "   POLY1305AES TEST 3:\t" << (correct?"Passed":"Failed") << std::endl;
-        all_correct &= correct;
-    }
+    data = unhexlify("");
+    key = unhexlify("75deaa25c09f208e1dc4ce6b5cad3fbf");
+    r = unhexlify("a0f3080000f46400d0c7e9076c834403");
+    nonce = unhexlify("61ee09218d29b0aaed7e154a2c5509cc");
+    POLY1305AES p2(r, nonce);
+    p2.HASH(key, data);
+    correct = (p2.hexdigest() == "dd3fab2251f11ac759f0887129cc2ee7");
+    stream << "   POLY1305AES TEST 2:\t" << (correct?"Passed":"Failed") << std::endl;
+    all_correct &= correct;
+
+    data = unhexlify("ab0812724a7f1e342742cbed374d94d136c6b8795d45b3819830f2c04491faf0990c62e48b8018b2c3e4a0fa3134cb67fa83e158c994d961c4cb21095c1bf9");
+    key = unhexlify("e1a5668a4d5b66a5f68cc5424ed5982d");
+    r = unhexlify("12976a08c4426d0ce8a82407c4f48207");
+    nonce = unhexlify("9ae831e743978d3a23527c7128149e3a");
+    POLY1305AES p3(r, nonce);
+    p3.HASH(key, data);
+    correct = (p3.hexdigest() == "5154ad0d2cb26e01274fc51148491f1b");
+    stream << "   POLY1305AES TEST 3:\t" << (correct?"Passed":"Failed") << std::endl;
+    all_correct &= correct;
 
     return all_correct;
 }
