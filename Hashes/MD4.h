@@ -23,12 +23,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifndef __MD4__
+#define __MD4__
+
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
 #include "Hash.h"
-
-#ifndef __MD4__
-#define __MD4__
 
 #include "MD4_Const.h"
 

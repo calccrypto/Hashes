@@ -24,14 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifndef __POLYAES1305__
+#define __POLYAES1305__
+
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
 #include "../Encryptions/AES.h"
 
 #include <gmpxx.h>
 
-#ifndef __POLYAES1305__
-#define __POLYAES1305__
 class POLY1305AES {
     /*bytes   r[3], r[7], r[11], r[15] have to be less than 16
               r[4], r[8], r[12] have to = 0 mod 4

@@ -23,11 +23,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifndef __LM__
+#define __LM__
+
 #include "../common/includes.h"
 #include "../Encryptions/DES.h"
 
-#ifndef __LM__
-#define __LM__
 class LM {
     private:
         std::string data;

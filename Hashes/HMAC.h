@@ -23,12 +23,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifndef __HMAC__
+#define __HMAC__
+
 #include <iostream>
 
 #include "Hashes.h"
 
-#ifndef __HMAC__
-#define __HMAC__
 template <class H = MD5>
 class HMAC{
     private:

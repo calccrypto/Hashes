@@ -23,10 +23,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <iostream>
-
 #ifndef __MD4_CONST__
 #define __MD4_CONST__
+
+#include <iostream>
+
 const uint8_t MD4_R[3][4] = {{3, 7, 11, 19},
                              {3, 5, 9, 13},
                              {3, 9, 11, 15}};
