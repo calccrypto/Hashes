@@ -1,5 +1,5 @@
 # Hashes Makefile
-CXX=g++
+CXX?=g++
 LFLAGS=-lgmpxx -lgmp
 CFLAGS=-std=c++11 -Wall -c
 
