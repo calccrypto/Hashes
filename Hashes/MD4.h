@@ -34,16 +34,29 @@ THE SOFTWARE.
 
 class MD4 : public Hash{
     private:
-        uint32_t h0, h1, h2, h3;
-        void run(const std::string & data, uint32_t & H0, uint32_t & H1, uint32_t & H2, uint32_t & H3);
+        struct context{
+            uint32_t h0, h1, h2, h3;
+            context(uint32_t h0, uint32_t h1, uint32_t h2, uint32_t h3) :
+                h0(h0),
+                h1(h1),
+                h2(h2),
+                h3(h3)
+            {}
+            ~context(){
+                h0 = h1 = h2 = h3 = 0;
+            }
+        };
+        context ctx;
+        
+        void run(const std::string & data, context & ctx) const;
 
     public:
-        MD4(const std::string & data = "");
+        MD4();
+        MD4(const std::string & data);
         void update(const std::string & data = "");
         std::string hexdigest();
-        unsigned int blocksize();
-        unsigned int digestsize();
+        unsigned int blocksize() const;
+        unsigned int digestsize() const;
 };
-
 
 #endif

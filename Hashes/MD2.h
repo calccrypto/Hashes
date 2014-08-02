@@ -44,11 +44,12 @@ class MD2 : public Hash{
         void run();
 
     public:
-        MD2(const std::string & data = "");
+        MD2();
+        MD2(const std::string & data);
         void update(const std::string & data = "");
         std::string hexdigest();
-        unsigned int blocksize();
-        unsigned int digestsize();
+        unsigned int blocksize() const;
+        unsigned int digestsize() const;
 };
 
 #endif

@@ -29,10 +29,14 @@ THE SOFTWARE.
 #include "SHA512.h"
 
 class SHA384 : public SHA512{
+    private:
+        void original_h();
+
     public:
-        SHA384(const std::string & data = "");
-        void update(const std::string & data = "");
+        SHA384();
+        SHA384(const std::string & data);
         std::string hexdigest();
-        unsigned int digestsize();
+        unsigned int blocksize() const;
+        unsigned int digestsize() const;
 };
 #endif

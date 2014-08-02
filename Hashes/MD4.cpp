@@ -1,8 +1,8 @@
 #include "./MD4.h"
 
-void MD4::run(const std::string & data, uint32_t & H0, uint32_t & H1, uint32_t & H2, uint32_t & H3){
+void MD4::run(const std::string & data, context & state) const{
     for(unsigned int i = 0; i < (data.size() >> 6); i++){
-        uint32_t a = h0, b = h1, c = h2, d = h3;
+        uint32_t a = state.h0, b = state.h1, c = state.h2, d = state.h3;
         std::string W = data.substr(i << 6, 64);
         uint32_t w[16];
         for(uint8_t x = 0; x < 16; x++){
@@ -29,54 +29,58 @@ void MD4::run(const std::string & data, uint32_t & H0, uint32_t & H1, uint32_t &
             b = ROL(a + f + w[k[x & 15]], MD4_R[x >> 4][x & 3], 32);
             a = t;
         }
-        H0 += a;
-        H1 += b;
-        H2 += c;
-        H3 += d;
+        state.h0 += a;
+        state.h1 += b;
+        state.h2 += c;
+        state.h3 += d;
     }
 }
 
-MD4::MD4(const std::string & data){
-    h0 = 0x67452301;
-    h1 = 0xefcdab89;
-    h2 = 0x98badcfe;
-    h3 = 0x10325476;
+MD4::MD4():
+    Hash(),
+    ctx(0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476)
+{
+}
+
+MD4::MD4(const std::string & data):
+    MD4()
+{
     update(data);
 }
 
 void MD4::update(const std::string & data){
-    bytes += data.size();
-    buffer += data;
+    clen += data.size();
+    stack += data;
 
     std::string temp = "";
-    for(unsigned int i = 0; i < ((bytes >> 6) << 6); i += 4){
-        temp += little_end(buffer.substr(i, 4), 256);
+    for(unsigned int i = 0; i < ((clen >> 6) << 6); i += 4){
+        temp += little_end(stack.substr(i, 4), 256);
     }
-    run(temp, h0, h1, h2, h3);
-    buffer = buffer.substr(buffer.size() - (buffer.size() & 63), 64);
+    run(temp, ctx);
+    stack = stack.substr(stack.size() - (stack.size() & 63), 64);
 }
 
 std::string MD4::hexdigest(){
-    uint32_t out0 = h0, out1 = h1, out2 = h2, out3 = h3;
-    std::string data = buffer + "\x80" + std::string((((bytes & 63) > 55)?119:55) - (bytes & 63), 0);
+    context out = ctx;
+    std::string data = stack + "\x80" + std::string((((clen & 63) > 55)?119:55) - (clen & 63), 0);
 
     std::string temp = "";
     for(unsigned int i = 0; i < data.size(); i += 4){
         temp += little_end(data.substr(i, 4), 256);
     }
 
-    std::string len = unhexlify(makehex(bytes << 3, 16));
+    std::string len = unhexlify(makehex(clen << 3, 16));
     temp += len.substr(4, 4) + len.substr(0, 4);
 
-    run(temp, out0, out1, out2, out3);
+    run(temp, out);
 
-    return little_end(makehex(out0, 8), 16) + little_end(makehex(out1, 8), 16) + little_end(makehex(out2, 8), 16) + little_end(makehex(out3, 8), 16);
+    return little_end(makehex(out.h0, 8), 16) + little_end(makehex(out.h1, 8), 16) + little_end(makehex(out.h2, 8), 16) + little_end(makehex(out.h3, 8), 16);
 }
 
-unsigned int MD4::blocksize() {
+unsigned int MD4::blocksize() const{
     return 512;
 }
 
-unsigned int MD4::digestsize(){
+unsigned int MD4::digestsize() const{
     return 128;
 }

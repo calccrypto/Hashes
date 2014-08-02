@@ -21,26 +21,32 @@ void MD2::process(std::string & x, const std::string & data){
     }
 }
 
-MD2::MD2(const std::string & data){
-    L = 0;
-    C = std::string(16, 0);
-    X = std::string(48, 0);
+MD2::MD2():
+    L(0),
+    C(std::string(16, 0)),
+    X(std::string(48, 0))
+{
+}
+
+MD2::MD2(const std::string & data):
+    MD2()
+{
     update(data);
 }
 
 void MD2::update(const std::string & data){
-    buffer += data;
-    for(unsigned int i = 0; i < (buffer.size() >> 4); i++){
+    stack += data;
+    for(unsigned int i = 0; i < (stack.size() >> 4); i++){
         std::string temp = data.substr(i << 4, 16);
         checksum(C, temp);
         process(X, temp);
     }
-    buffer = buffer.substr(buffer.size() - (buffer.size() & 15), 16);
+    stack = stack.substr(stack.size() - (stack.size() & 15), 16);
 }
 
 std::string MD2::hexdigest(){
-    uint8_t pad = 16 - (buffer.size() & 15);
-    std::string data = buffer + std::string(pad, pad);
+    uint8_t pad = 16 - (stack.size() & 15);
+    std::string data = stack + std::string(pad, pad);
     std::string c = C;
     checksum(c, data);
     std::string x = X;
@@ -49,10 +55,10 @@ std::string MD2::hexdigest(){
     return hexlify(x.substr(0, 16));
 }
 
-unsigned int MD2::blocksize(){
+unsigned int MD2::blocksize() const{
     return 128;
 };
 
-unsigned int MD2::digestsize(){
+unsigned int MD2::digestsize() const{
     return 128;
 };

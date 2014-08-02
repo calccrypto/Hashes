@@ -35,21 +35,32 @@ THE SOFTWARE.
 
 class SHA256 : public Hash{
     protected:
-        uint32_t h0, h1, h2, h3, h4, h5, h6, h7;
+        struct context{
+            uint32_t h0, h1, h2, h3, h4, h5, h6, h7;
 
-        uint32_t S0(const uint32_t & value);
-        uint32_t S1(const uint32_t & value);
-        uint32_t s0(const uint32_t & value);
-        uint32_t s1(const uint32_t & value);
+            ~context(){
+                h0 = h1 = h2 = h3 = h4 = h5 = h6 = h7 = 0;
+            }
+        };
+        context ctx;
 
-        void run(const std::string & data, uint32_t & H0, uint32_t & H1, uint32_t & H2, uint32_t & H3, uint32_t & H4, uint32_t & H5, uint32_t & H6, uint32_t & H7);
+        uint32_t S0(const uint32_t & value) const;
+        uint32_t S1(const uint32_t & value) const;
+        uint32_t s0(const uint32_t & value) const;
+        uint32_t s1(const uint32_t & value) const;
+
+        virtual void original_h();
+
+        void calc(const std::string & data, context & state) const;
 
     public:
-        SHA256(const std::string & data = "");
-        void update(const std::string & data = "");
-        std::string hexdigest();
-        unsigned int blocksize();
-        virtual unsigned int digestsize();;
+        SHA256();
+        SHA256(const std::string & data);
+
+        void update(const std::string &str);
+        virtual std::string hexdigest();
+        virtual unsigned int blocksize() const;
+        virtual unsigned int digestsize() const;
 };
 
 #endif

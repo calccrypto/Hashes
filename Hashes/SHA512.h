@@ -35,19 +35,29 @@ THE SOFTWARE.
 
 class SHA512 : public Hash{
     protected:
-        uint64_t h0, h1, h2, h3, h4, h5, h6, h7;
-        uint64_t S0(uint64_t & value);
-        uint64_t S1(uint64_t & value);
-        uint64_t s0(uint64_t & value);
-        uint64_t s1(uint64_t & value);
+        struct context{
+            uint64_t h0, h1, h2, h3, h4, h5, h6, h7;
+            ~context(){
+                h0 = h1 = h2 = h3 = h4 = h5 = h6 = h7 = 0;
+            }
+        };
+        context ctx;
 
-        void run(const std::string & data, uint64_t & H0, uint64_t & H1, uint64_t & H2, uint64_t & H3, uint64_t & H4, uint64_t & H5, uint64_t & H6, uint64_t & H7);
+        uint64_t S0(uint64_t & value) const;
+        uint64_t S1(uint64_t & value) const;
+        uint64_t s0(uint64_t & value) const;
+        uint64_t s1(uint64_t & value) const;
+
+        virtual void original_h();
+
+        void calc(const std::string & data, context & state) const;
 
     public:
-        SHA512(const std::string & data = "");
-        void update(const std::string & data = "");
-        std::string hexdigest();
-        unsigned int blocksize();
-        virtual unsigned int digestsize();
+        SHA512();
+        SHA512(const std::string & data);
+        void update(const std::string & str);
+        virtual std::string hexdigest();
+        virtual unsigned int blocksize() const;
+        virtual unsigned int digestsize() const;
 };
 #endif
