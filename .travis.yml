@@ -26,6 +26,6 @@ before_install:
   sudo apt-get install libgmp-dev
   
 before_script:
-  - cd test && make
+  - cd tests && make
 
-script: ./test
+script: ./tests
