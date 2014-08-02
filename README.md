@@ -1,8 +1,10 @@
 A library of cryptographic hashing algorithms
-by Jason Lee @ calccrypto at gmail.com
+Copyright (c) 2013, 2014 Jason Lee @ calccrypto at gmail.com
 
 Please see LICENSE file for license.
 
+[![Build Status](https://travis-ci.org/calccrypto/Hashes.svg?branch=master)](https://travis-ci.org/calccrypto/OpenPGP)
+<pre>
 IMPORTANT:
     This library was not written for actual use.
     Rather, it was meant for educational purposes,
@@ -30,16 +32,15 @@ MACs
     POLY1305AES
 
 Build:
-    make
+	make (creates the object files and libHashes.a)
 
     or
 
     g++ -std=c++11 main.cpp common/*.cpp Encryptions/*.cpp Hashes/*.cpp -lgmpxx -lgmp
 
     or some equivalent
-
-You have to provide the main function/file since this is a library,
-not a fully functioning program.
+    
+    Test code and its makefile are included in the test folder.
 
 Usage:
     Ex:
@@ -65,3 +66,4 @@ Notes:
     The format was inspired by the Python 2.7 hashlib module 
 
     Hashes.h provides a quick test to check that the algorithms are correct.
+</pre>
