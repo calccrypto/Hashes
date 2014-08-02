@@ -46,6 +46,20 @@ THE SOFTWARE.
 #include "HMAC.h"
 #include "POLY1305AES.h"
 
-bool validate_hash(std::ostream & stream = null_out);
+// data is in ASCII, digest is in Hex
+template <typename Alg> bool validate_hash(const std::string & data, const std::string & digest, std::ostream & stream = null_out, const std::string & name = "", const unsigned int & linew = 25){
+    bool correct = (Alg(data).digest() == unhexlify(digest)); // unhexlify digest just in case the input digest uses uppercase hex digits
+    stream << "    " << pad(name + ":", linew - 4, ' ') << (correct?"Passed":"Failed") << std::endl;
+    return correct;
+}
+
+// key and message are in ASCII, digest is in Hex
+template <typename Alg> bool validate_HMAC(const std::string & key, const std::string & message, const std::string & digest, std::ostream & stream = null_out, const std::string & name = "", const unsigned int & linew = 25){
+    bool correct = (Alg(key, message).digest() == unhexlify(digest)); // unhexlify digest just in case the input digest uses uppercase hex digits
+    stream << "    " << pad(name + ":", linew - 4, ' ') << (correct?"Passed":"Failed") << std::endl;
+    return correct;
+}
+
+bool validate_all_hashes(std::ostream & stream = null_out, const unsigned int & linew = 25);
 
 #endif
