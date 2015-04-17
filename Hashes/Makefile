@@ -6,16 +6,16 @@ CFLAGS=-std=c++11 -Wall -c
 debug: CFLAGS += -g
 debug: all
 
-all: Hash.o Hashes.o LM.o MD2.o MD4.o MD5.o POLY1305AES.o RIPEMD128.o RIPEMD160.o SHA1.o SHA224.o SHA256.o SHA2_Functions.o SHA384.o SHA512.o
-
-Hashes:
-	$(MAKE) -C Hashes
+all: Hash.o Hashes.o Keccak.o LM.o MD2.o MD4.o MD5.o POLY1305AES.o RIPEMD128.o RIPEMD160.o SHA1.o SHA224.o SHA256.o SHA2_Functions.o SHA384.o SHA512.o SHA3.o
 
 Hash.o: Hash.cpp Hash.h
 	$(CXX) $(CFLAGS) Hash.cpp
 
 Hashes.o: Hashes.cpp Hashes.h
 	$(CXX) $(CFLAGS) Hashes.cpp
+
+Keccak.o: Keccak.cpp Keccak.h ../common/cryptomath.h ../common/includes.h Keccak_Const.h
+	$(CXX) $(CFLAGS) Keccak.cpp
 
 LM.o: LM.cpp LM.h ../common/includes.h ../Encryptions/DES.h
 	$(CXX) $(CFLAGS) LM.cpp
@@ -55,6 +55,9 @@ SHA384.o: SHA384.cpp SHA384.h SHA512.h
 
 SHA512.o: SHA512.cpp SHA512.h ../common/cryptomath.h ../common/includes.h Hash.h SHA2_Functions.h SHA512_Const.h
 	$(CXX) $(CFLAGS) SHA512.cpp
+
+SHA3.o: SHA3.cpp SHA3.h ../common/cryptomath.h ../common/includes.h Keccak_Const.h
+	$(CXX) $(CFLAGS) SHA3.cpp
 
 clean:
 	rm -f *.o

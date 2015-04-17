@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "../common/includes.h"
 #include "Hash.h"
 
+// #include "Keccak.h"
 #include "LM.h"
 #include "MD2.h"
 #include "MD4.h"
@@ -42,6 +43,7 @@ THE SOFTWARE.
 #include "SHA224.h"
 #include "SHA512.h"
 #include "SHA384.h"
+#include "SHA3.h"
 
 #include "HMAC.h"
 #include "POLY1305AES.h"
