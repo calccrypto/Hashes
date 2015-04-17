@@ -326,3 +326,8 @@ std::string KECCAK::operator()(const std::string & M, const unsigned int d){
     // return d;
 // }
 // //////////////////////////////////////////////////////////////////////////////////////////
+
+// template class SHA3 <256>;
+// template class SHA3 <224>;
+// template class SHA3 <384>;
+// template class SHA3 <512>;

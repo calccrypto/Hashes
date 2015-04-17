@@ -103,11 +103,6 @@ class SHA3 : public Hash{
         unsigned int blocksize() const;
         unsigned int digestsize() const;
 };
-
-template class SHA3 <224>;
-template class SHA3 <256>;
-template class SHA3 <384>;
-template class SHA3 <512>;
 // //////////////////////////////////////////////////////////////////////////////////////////
 
 #endif

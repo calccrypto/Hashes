@@ -138,9 +138,4 @@ class KECCAK{
         // unsigned int digestsize() const;
 // };
 
-// template class SHA3 <224>;
-// template class SHA3 <256>;
-// template class SHA3 <384>;
-// template class SHA3 <512>;
-
 #endif

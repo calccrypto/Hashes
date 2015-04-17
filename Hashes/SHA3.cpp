@@ -191,3 +191,8 @@ unsigned int SHA3 <d>::digestsize() const {
     return d;
 }
 // //////////////////////////////////////////////////////////////////////////////////////////
+
+template class SHA3 <256>;
+template class SHA3 <224>;
+template class SHA3 <384>;
+template class SHA3 <512>;
