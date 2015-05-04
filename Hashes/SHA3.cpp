@@ -77,11 +77,6 @@ typename SHA3 <d>::StateArray SHA3 <d>::iota(const typename SHA3 <d>::StateArray
     return Aprime;
 }
 
-// template <const unsigned int d>
-// typename SHA3 <d>::StateArray SHA3 <d>::Rnd(const typename SHA3 <d>::StateArray & A, const uint64_t rc) const {
-    // return iota(chi(pirho(theta(A))), rc);
-// }
-
 // assumes S is already in binary
 template <const unsigned int d>
 typename std::string SHA3 <d>::f(const std::string & S) const {
