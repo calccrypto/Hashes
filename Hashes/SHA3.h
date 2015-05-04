@@ -36,17 +36,21 @@ THE SOFTWARE.
 
 #include "Keccak_Const.h"
 
-// KECCAK-p[b, n_r] = base algorithm
-// KECCAK-f[b] = KECCAK-p[b, 12 + 2 * l]
-class KECCAK_p {
+template <const unsigned int d>
+class SHA3 : public Hash{
     private:
-        unsigned int b,     // width in bits
-                     w,     // lane size
-                     l,     // log of lane size
-                     nr;    // number of rounds
+        const unsigned int b,     // width in bits (1600)
+                           w,     // lane size (64)
+                           l,     // log of lane size (6)
+                           nr;    // number of rounds (24)
 
         typedef std::array <std::array <uint64_t, 5>, 5> StateArray;
 
+        std::string state;
+        std::string stack;
+        int r;                    // rate (1600 - 2 * d)
+
+        // Keccak Functions /////////////////
         StateArray s2sa(const std::string & S) const;
         std::string sa2s(const StateArray & A) const;
 
@@ -55,43 +59,16 @@ class KECCAK_p {
         StateArray chi(const StateArray & A) const;
         StateArray iota(const StateArray & A, const uint64_t rc) const;
 
-        StateArray Rnd(const StateArray & A, const uint64_t rc) const;
+        std::string f(const std::string & S) const;
+        // //////////////////////////////////
 
-        void print(const StateArray & A) const;
-
-    public:
-        /*
-            w = b / 25
-            l = log2(b / 25)
-            b: 25 50 100 200 400 800 1600
-            w:  1  2   4   8  16  32   64
-            l:  0  1   2   3   4   5    6
-        */
-
-        KECCAK_p(const unsigned int B, const unsigned int Nr);
-
-        // assumes S is already in binary
-        std::string operator()(const std::string & S) const;
-
-        unsigned int get_b() const;
-};
-
-// //////////////////////////////////////////////////////////////////////////////////////////
-// Dedicated SHA-3 implementation
-template <const unsigned int d>
-class SHA3 : public Hash{
-    private:
-        std::string state;
-        std::string stack;
-
-        KECCAK_p f;
-        int r;
-
+        // Sponge Functions /////////////////
         // absorb data into given state
         void absorb(std::string & S, const std::string & P) const;
 
         // squeeze output data (concatenate results of f)
         std::string squeeze(std::string & S) const;
+        // //////////////////////////////////
 
     public:
         SHA3();
@@ -103,6 +80,5 @@ class SHA3 : public Hash{
         unsigned int blocksize() const;
         unsigned int digestsize() const;
 };
-// //////////////////////////////////////////////////////////////////////////////////////////
 
 #endif

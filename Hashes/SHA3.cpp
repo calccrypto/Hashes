@@ -1,8 +1,9 @@
 #include "SHA3.h"
 
 // //////////////////////////////////////////////////////////////////////////////////////////
-KECCAK_p::StateArray KECCAK_p::s2sa(const std::string & S) const {
-    KECCAK_p::StateArray A = {{0}};
+template <const unsigned int d>
+typename SHA3 <d>::StateArray SHA3 <d>::s2sa(const std::string & S) const {
+    SHA3 <d>::StateArray A = {{0}};
     for(uint8_t y = 0; y < 5; y++){
         for(uint8_t x = 0; x < 5; x++){
             A[x][y] = toint(little_end(S.substr(w * (5 * y + x), w), 2), 2);
@@ -11,7 +12,8 @@ KECCAK_p::StateArray KECCAK_p::s2sa(const std::string & S) const {
     return A;
 }
 
-std::string KECCAK_p::sa2s(const KECCAK_p::StateArray & A) const {
+template <const unsigned int d>
+std::string SHA3 <d>::sa2s(const typename SHA3 <d>::StateArray & A) const {
     std::string S = "";
     for(uint8_t j = 0; j < 5; j++){
         for(uint8_t i = 0; i < 5; i++){
@@ -22,8 +24,9 @@ std::string KECCAK_p::sa2s(const KECCAK_p::StateArray & A) const {
     return S;
 }
 
-KECCAK_p::StateArray KECCAK_p::theta(const KECCAK_p::StateArray & A) const {
-    KECCAK_p::StateArray Aprime = A;
+template <const unsigned int d>
+typename SHA3 <d>::StateArray SHA3 <d>::theta(const typename SHA3 <d>::StateArray & A) const {
+    SHA3 <d>::StateArray Aprime = A;
 
     // step 1
     std::array <uint64_t, 5> C;
@@ -45,8 +48,9 @@ KECCAK_p::StateArray KECCAK_p::theta(const KECCAK_p::StateArray & A) const {
     return Aprime;
 }
 
-KECCAK_p::StateArray KECCAK_p::pirho(const KECCAK_p::StateArray & A) const {
-    KECCAK_p::StateArray Aprime;
+template <const unsigned int d>
+typename SHA3 <d>::StateArray SHA3 <d>::pirho(const typename SHA3 <d>::StateArray & A) const {
+    SHA3 <d>::StateArray Aprime;
     for(uint8_t x = 0; x < 5; x++){
         for(uint8_t y = 0; y < 5; y++){
             Aprime[y][(2 * x + 3 * y) % 5] = ROL(A[x][y], Keccak_rot[x][y], 64);
@@ -55,8 +59,9 @@ KECCAK_p::StateArray KECCAK_p::pirho(const KECCAK_p::StateArray & A) const {
     return Aprime;
 }
 
-KECCAK_p::StateArray KECCAK_p::chi(const KECCAK_p::StateArray & A) const {
-    KECCAK_p::StateArray Aprime = A;
+template <const unsigned int d>
+typename SHA3 <d>::StateArray SHA3 <d>::chi(const typename SHA3 <d>::StateArray & A) const {
+    SHA3 <d>::StateArray Aprime = A;
     for(uint8_t x = 0; x < 5; x++){
         for(uint8_t y = 0; y < 5;  y++){
             Aprime[x][y] = A[x][y] ^ ((~A[(x + 1) % 5][y]) & A[(x + 2) % 5][y]);
@@ -65,46 +70,28 @@ KECCAK_p::StateArray KECCAK_p::chi(const KECCAK_p::StateArray & A) const {
     return Aprime;
 }
 
-KECCAK_p::StateArray KECCAK_p::iota(const KECCAK_p::StateArray & A, const uint64_t rc) const {
-    KECCAK_p::StateArray Aprime = A;
+template <const unsigned int d>
+typename SHA3 <d>::StateArray SHA3 <d>::iota(const typename SHA3 <d>::StateArray & A, const uint64_t rc) const {
+    SHA3 <d>::StateArray Aprime = A;
     Aprime[0][0] ^= rc;
     return Aprime;
 }
 
-KECCAK_p::KECCAK_p::StateArray KECCAK_p::Rnd(const KECCAK_p::StateArray & A, const uint64_t rc) const {
-    return iota(chi(pirho(theta(A))), rc);
-}
-
-void KECCAK_p::print(const KECCAK_p::StateArray & A) const{
-    for(int y = 0; y < 5; y++){
-        for(int x = 0; x < 5; x++){
-             std::cout << makehex(A[x][y], 16) << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
- KECCAK_p::KECCAK_p(const unsigned int B, const unsigned int Nr)
-    : b(B), w(B / 25), l(log2(B / 25)), nr(Nr)
-{
-    if (l > 6){
-        throw std::invalid_argument("b should be one of the values in Table 1 of FIPS 202.");
-    }
-}
+// template <const unsigned int d>
+// typename SHA3 <d>::StateArray SHA3 <d>::Rnd(const typename SHA3 <d>::StateArray & A, const uint64_t rc) const {
+    // return iota(chi(pirho(theta(A))), rc);
+// }
 
 // assumes S is already in binary
-std::string KECCAK_p::operator()(const std::string & S) const {
-    KECCAK_p::StateArray A = s2sa(S);
+template <const unsigned int d>
+typename std::string SHA3 <d>::f(const std::string & S) const {
+    SHA3 <d>::StateArray A = s2sa(S);
 
     for(unsigned int i = 0; i < nr; i++){
-        A = Rnd(A, Keccak_RC[i]);
+        A = iota(chi(pirho(theta(A))), Keccak_RC[i]);
     }
 
     return sa2s(A);
-}
-
-unsigned int KECCAK_p::get_b() const {
-    return b;
 }
 // //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -132,10 +119,12 @@ std::string SHA3 <d>::squeeze(std::string & S) const {
     return Z.substr(0, d);
 }
 
+
 template <const unsigned int d>
 SHA3 <d>::SHA3()
-    : state((size_t) 1600, (char) '0'), stack(""),
-    f(KECCAK_p(1600, 24)), r(1600 - (d << 1))
+    : b(1600), w(64), l(6), nr(24),
+      state((size_t) 1600, (char) '0'), stack(""),
+      r(1600 - (d << 1))
 {}
 
 template <const unsigned int d>
