@@ -1,10 +1,10 @@
 # Hashes Library Test Makefile
 CXX?=g++
-LFLAGS=-lHashes -lgmp -lgmpxx -L..
-CFLAGS=-std=c++11 -Wall
+CXXFLAGS=-std=c++11 -Wall
+LDFLAGS=-lHashes -lgmp -lgmpxx -L..
 TARGET=tests
 
-debug: CFLAGS += -g
+debug: CXXFLAGS += -g
 debug: all
 
 all: $(TARGET)
@@ -13,10 +13,12 @@ all: $(TARGET)
 
 lib:
 	$(MAKE) -C ..
-    
+
 $(TARGET): tests.cpp lib
-	$(CXX) $(CFLAGS) tests.cpp $(LFLAGS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) tests.cpp $(LDFLAGS) -o $(TARGET)
 
 clean:
 	rm -f $(TARGET)
-	$(MAKE) -C .. clean
+
+clean-all:  clean
+	$(MAKE) clean-all -C ..
