@@ -1,7 +1,7 @@
 /*
-DESX.h
-
-The MIT License (MIT)
+Hashes.h
+File to include to make all hash algorithms
+available. Also provides a testing function
 
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
@@ -24,25 +24,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __DESX__
-#define __DESX__
+#ifndef HASHES_H
+#define HASHES_H
 
-#include "../common/includes.h"
-#include "SymAlg.h"
+#include "common/cryptomath.h"
+#include "common/includes.h"
+#include "Hashes/Hash.h"
 
-#include "DES.h"
+// #include "Keccak.h"
+#include "Hashes/LM.h"
+#include "Hashes/MD2.h"
+#include "Hashes/MD4.h"
+#include "Hashes/MD5.h"
+#include "Hashes/RIPEMD128.h"
+#include "Hashes/RIPEMD160.h"
+#include "Hashes/SHA1.h"
+#include "Hashes/SHA256.h"
+#include "Hashes/SHA224.h"
+#include "Hashes/SHA512.h"
+#include "Hashes/SHA384.h"
+#include "Hashes/SHA3.h"
 
-class DESX : public SymAlg{
-    private:
-        DES des;
-        std::string K1, K2;
-        
-    public:
-        DESX();
+#include "Hashes/HMAC.h"
+#include "Hashes/POLY1305AES.h"
 
-        DESX(const std::string & KEY, const std::string & KEY1, const std::string & KEY2);
-        std::string encrypt(const std::string & DATA);
-        std::string decrypt(const std::string & DATA);
-        unsigned int blocksize() const;
-};
 #endif

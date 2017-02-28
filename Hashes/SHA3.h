@@ -3,7 +3,7 @@ SHA3.h
 This implementation only works for SHA3 since it uses
 64 bit unsigned ints as lanes instead of individual bits.
 
-Copyright (c) 2013 Jason Lee
+Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

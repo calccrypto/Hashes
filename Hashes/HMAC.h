@@ -2,7 +2,7 @@
 HMAC.h
 Hash-based message authentication code
 
-Copyright (c) 2013 Jason Lee
+Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 #include <iostream>
 
-#include "Hashes.h"
+#include "../Hashes.h"
 
 template <class H = MD5>
 class HMAC{
