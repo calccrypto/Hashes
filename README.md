@@ -1,5 +1,5 @@
 A library of cryptographic hashing algorithms
-Copyright (c) 2013, 2014 Jason Lee @ calccrypto at gmail.com
+Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Please see LICENSE file for license.
 
