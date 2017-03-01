@@ -51,5 +51,4 @@ class MD2 : public Hash{
         unsigned int blocksize() const;
         unsigned int digestsize() const;
 };
-
 #endif

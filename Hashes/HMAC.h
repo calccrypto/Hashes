@@ -55,5 +55,4 @@ class HMAC{
 
         std::string hexdigest(){return hexlify(h);}
 };
-
 #endif
