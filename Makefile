@@ -2,14 +2,9 @@
 AR=ar
 TARGET=libHashes.a
 
-include common/sources.make
-COMMON_OBJECTS=$(addprefix common/, $(COMMON_SOURCES:.cpp=.o))
-
-include Encryptions/sources.make
-ENCRYPTIONS_OBJECTS=$(addprefix Encryptions/, $(ENCRYPTIONS_SOURCES:.cpp=.o))
-
-include Hashes/sources.make
-HASHES_OBJECTS=$(addprefix Hashes/, $(HASHES_SOURCES:.cpp=.o))
+include common/objects.mk
+include Encryptions/objects.mk
+include Hashes/objects.mk
 
 all: $(TARGET)
 
@@ -25,7 +20,7 @@ Hashes:
 	$(MAKE) -C Hashes
 
 $(TARGET): common Encryptions Hashes
-	$(AR) -r $(TARGET) $(COMMON_OBJECTS) $(ENCRYPTIONS_OBJECTS) $(HASHES_OBJECTS)
+	$(AR) -r $(TARGET) $(addprefix common/, $(COMMON_OBJECTS)) $(addprefix Encryptions/, $(ENCRYPTIONS_OBJECTS)) $(addprefix Hashes/, $(HASHES_OBJECTS))
 
 clean:
 	rm -f $(TARGET)
