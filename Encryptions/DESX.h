@@ -1,8 +1,6 @@
 /*
 DESX.h
 
-The MIT License (MIT)
-
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,7 +34,7 @@ class DESX : public SymAlg{
     private:
         DES des;
         std::string K1, K2;
-        
+
     public:
         DESX();
 
@@ -45,4 +43,5 @@ class DESX : public SymAlg{
         std::string decrypt(const std::string & DATA);
         unsigned int blocksize() const;
 };
+
 #endif

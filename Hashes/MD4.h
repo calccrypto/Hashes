@@ -58,4 +58,5 @@ class MD4 : public Hash{
         unsigned int blocksize() const;
         unsigned int digestsize() const;
 };
+
 #endif

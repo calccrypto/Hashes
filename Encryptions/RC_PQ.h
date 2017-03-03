@@ -1,8 +1,6 @@
 /*
 RC_PQ.h
 
-The MIT License (MIT)
-
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,4 +30,5 @@ THE SOFTWARE.
 #include <stdexcept>
 
 void rc_pq(const int w , uint64_t & p, uint64_t & q);
+
 #endif

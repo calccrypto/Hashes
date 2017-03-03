@@ -62,4 +62,5 @@ class RIPEMD128 : public Hash{
         unsigned int blocksize() const;
         unsigned int digestsize() const;
 };
+
 #endif

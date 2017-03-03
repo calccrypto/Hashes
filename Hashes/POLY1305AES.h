@@ -47,4 +47,5 @@ class POLY1305AES {
         std::string hexdigest();
         std::string digest();
 };
+
 #endif

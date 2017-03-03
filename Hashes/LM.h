@@ -39,4 +39,5 @@ class LM {
         std::string hexdigest();
         std::string digest();
 };
+
 #endif

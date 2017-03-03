@@ -1,8 +1,6 @@
 /*
 TEA.h
 
-The MIT License (MIT)
-
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,4 +40,5 @@ class TEA : public SymAlg{
         std::string decrypt(const std::string & DATA);
         unsigned int blocksize() const;
 };
+
 #endif

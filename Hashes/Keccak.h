@@ -137,4 +137,5 @@ class KECCAK{
         // unsigned int blocksize() const;
         // unsigned int digestsize() const;
 // };
+
 #endif

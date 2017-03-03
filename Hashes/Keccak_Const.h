@@ -1,5 +1,5 @@
 /*
-SHA3_const.h
+Keccak_Const.h
 Constant values for MD2
 
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
@@ -65,4 +65,5 @@ const uint64_t Keccak_RC[24] = {0x0000000000000001ULL,
                                 0x8000000000008080ULL,
                                 0x0000000080000001ULL,
                                 0x8000000080008008ULL};
+
 #endif
