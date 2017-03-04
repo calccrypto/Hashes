@@ -29,12 +29,12 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "RIPEMD_Const.h"
 #include "RIPEMD128_Const.h"
 
-class RIPEMD128 : public Hash{
+class RIPEMD128 : public HashAlg{
     private:
         struct context{
             uint32_t h0, h1, h2, h3;

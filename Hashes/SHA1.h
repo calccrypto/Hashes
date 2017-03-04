@@ -28,9 +28,9 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
-class SHA1 : public Hash {
+class SHA1 : public HashAlg {
     private:
         struct context{
             uint32_t h0, h1, h2, h3, h4;

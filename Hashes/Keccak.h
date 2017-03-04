@@ -32,7 +32,7 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "Keccak_Const.h"
 
@@ -122,7 +122,7 @@ class KECCAK{
 // // SHA3-384(M) = KECCAK[768]  (M || 01, 384)
 // // SHA3-512(M) = KECCAK[1024] (M || 01, 512)
 // template <unsigned int d>
-// class SHA3 : public Hash{
+// class SHA3 : public HashAlg{
     // private:
         // std::string hash;
         // KECCAK KECCAKC;

@@ -32,12 +32,12 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "Keccak_Const.h"
 
 template <const unsigned int d>
-class SHA3 : public Hash{
+class SHA3 : public HashAlg{
     private:
         const unsigned int b,     // width in bits (1600)
                            w,     // lane size (64)

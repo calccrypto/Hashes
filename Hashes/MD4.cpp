@@ -1,4 +1,4 @@
-#include "./MD4.h"
+#include "MD4.h"
 
 void MD4::run(const std::string & data, context & state) const{
     for(unsigned int i = 0; i < (data.size() >> 6); i++){
@@ -37,7 +37,7 @@ void MD4::run(const std::string & data, context & state) const{
 }
 
 MD4::MD4():
-    Hash(),
+    HashAlg(),
     ctx(0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476)
 {
 }

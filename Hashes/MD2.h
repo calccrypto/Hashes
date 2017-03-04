@@ -29,11 +29,11 @@ THE SOFTWARE.
 #include <vector>
 
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "MD2_Const.h"
 
-class MD2 : public Hash{
+class MD2 : public HashAlg{
     private:
         uint8_t L = 0;
         std::string C;

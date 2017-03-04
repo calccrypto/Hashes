@@ -1,4 +1,4 @@
-#include "./POLY1305AES.h"
+#include "POLY1305AES.h"
 
 POLY1305AES::POLY1305AES(const std::string & R, const std::string & NONCE){
     r = mpz_class(little_end(zfill(hexlify(R), 32, '0').substr(0, 32), 16), 16);

@@ -1,4 +1,4 @@
-#include "./LM.h"
+#include "LM.h"
 
 LM::LM(const std::string & key){
     run(key);

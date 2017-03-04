@@ -1,4 +1,4 @@
-HASHES_OBJECTS=Hash.o           \
+HASHES_OBJECTS=HashAlg.o        \
                Keccak.o         \
                LM.o             \
                MD2.o            \

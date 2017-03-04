@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 #include "common/cryptomath.h"
 #include "common/includes.h"
-#include "Hashes/Hash.h"
+#include "Hashes/HashAlg.h"
 
 // #include "Keccak.h"
 #include "Hashes/LM.h"

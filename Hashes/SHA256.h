@@ -28,12 +28,12 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "SHA2_Functions.h"
 #include "SHA256_Const.h"
 
-class SHA256 : public Hash{
+class SHA256 : public HashAlg{
     protected:
         struct context{
             uint32_t h0, h1, h2, h3, h4, h5, h6, h7;

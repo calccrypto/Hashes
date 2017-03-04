@@ -1,4 +1,4 @@
-#include "./RIPEMD128.h"
+#include "RIPEMD128.h"
 
 uint32_t RIPEMD128::F(const uint32_t & x, const uint32_t & y, const uint32_t & z, const uint8_t round) const{
     if (round < 16){
@@ -38,7 +38,7 @@ void RIPEMD128::run(const std::string & data, context & state) const{
 }
 
 RIPEMD128::RIPEMD128(): 
-    Hash(),
+    HashAlg(),
     ctx(RIPEMD_H0, RIPEMD_H1, RIPEMD_H2, RIPEMD_H3)
 {
 }

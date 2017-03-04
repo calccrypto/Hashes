@@ -1,4 +1,4 @@
-#include "./MD2.h"
+#include "MD2.h"
 
 void MD2::checksum(std::string & c, const std::string & data){
     for(uint8_t j = 0; j < 16; j++){

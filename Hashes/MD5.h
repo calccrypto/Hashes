@@ -28,11 +28,11 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "Hash.h"
+#include "HashAlg.h"
 
 #include "MD5_Const.h"
 
-class MD5 : public Hash{
+class MD5 : public HashAlg{
     private:
         struct context{
             uint32_t h0, h1, h2, h3;
