@@ -1,6 +1,6 @@
 #include "RIPEMD128.h"
 
-uint32_t RIPEMD128::F(const uint32_t & x, const uint32_t & y, const uint32_t & z, const uint8_t round) const{
+uint32_t RIPEMD128::F(const uint32_t & x, const uint32_t & y, const uint32_t & z, const uint8_t round) const {
     if (round < 16){
         return x ^ y ^ z;
     }
@@ -15,7 +15,7 @@ uint32_t RIPEMD128::F(const uint32_t & x, const uint32_t & y, const uint32_t & z
     }
 }
 
-void RIPEMD128::run(const std::string & data, context & state) const{
+void RIPEMD128::run(const std::string & data, context & state) const {
     for(unsigned int i = 0; i < (data.size() >> 6); i++){
         uint32_t a = state.h0, b = state.h1, c = state.h2, d = state.h3, A = state.h0, B = state.h1, C = state.h2, D = state.h3;
         uint32_t X[16];
@@ -78,10 +78,10 @@ std::string RIPEMD128::hexdigest(){
     return little_end(makehex(out.h0, 8), 16) + little_end(makehex(out.h1, 8), 16) + little_end(makehex(out.h2, 8), 16) + little_end(makehex(out.h3, 8), 16);
 }
 
-std::size_t RIPEMD128::blocksize() const{
+std::size_t RIPEMD128::blocksize() const {
     return 512;
 }
 
-std::size_t RIPEMD128::digestsize() const{
+std::size_t RIPEMD128::digestsize() const {
     return 128;
 }

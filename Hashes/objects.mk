@@ -1,6 +1,6 @@
 HASHES_OBJECTS=HashAlg.o        \
                MerkleDamgard.o  \
-               Keccak.o         \
+               KECCAK.o         \
                LM.o             \
                MD2.o            \
                MD4.o            \

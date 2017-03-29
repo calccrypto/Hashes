@@ -2,20 +2,41 @@
 
 #include "Hashes/KECCAK.h"
 
-#include "testvectors/sha/sha3.h"
+#include "testvectors/keccak/keccak.h"
 
-TEST(Keccak, 224) {
-    hash_test <Keccak <224> > (SHA3_224_TEST_VECTORS);
+TEST(KECCAK, 224) {
+    for(DataDigest const & dd : KECCAK_224_TEST_VECTORS){
+        std::string data, digest;
+        std::tie(data, digest) = dd;
+
+        // unhexlify digest just in case the input digest uses uppercase hex digits
+        EXPECT_EQ(unbinify(KECCAK(448)(data, 224)), unhexlify(digest));
+    }
 }
 
-TEST(Keccak, 256) {
-    hash_test <Keccak <256> > (SHA3_256_TEST_VECTORS);
-}
+TEST(KECCAK, 256) {
+    for(DataDigest const & dd : KECCAK_256_TEST_VECTORS){
+        std::string data, digest;
+        std::tie(data, digest) = dd;
 
-TEST(Keccak, 384) {
-    hash_test <Keccak <384> > (SHA3_384_TEST_VECTORS);
-}
+        // unhexlify digest just in case the input digest uses uppercase hex digits
+        EXPECT_EQ(unbinify(KECCAK(512)(data, 256)), unhexlify(digest));
+    }}
 
-TEST(Keccak, 512) {
-    hash_test <Keccak <512> > (SHA3_512_TEST_VECTORS);
-}
+TEST(KECCAK, 384) {
+    for(DataDigest const & dd : KECCAK_384_TEST_VECTORS){
+        std::string data, digest;
+        std::tie(data, digest) = dd;
+
+        // unhexlify digest just in case the input digest uses uppercase hex digits
+        EXPECT_EQ(unbinify(KECCAK(768)(data, 384)), unhexlify(digest));
+    }}
+
+TEST(KECCAK, 512) {
+    for(DataDigest const & dd : KECCAK_512_TEST_VECTORS){
+        std::string data, digest;
+        std::tie(data, digest) = dd;
+
+        // unhexlify digest just in case the input digest uses uppercase hex digits
+        EXPECT_EQ(unbinify(KECCAK(1024)(data, 512)), unhexlify(digest));
+    }}

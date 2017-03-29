@@ -1,4 +1,5 @@
-HASHES_TESTCASES_OBJECTS=lm.o           \
+HASHES_TESTCASES_OBJECTS=keccak.o       \
+                         lm.o           \
                          md2.o          \
                          md4.o          \
                          md5.o          \

@@ -4,7 +4,7 @@
 
 #include "testvectors/lm/lm.h"
 
-TEST(LM, testvector) {
-    EXPECT_EQ(LM().digestsize(), 128);
+TEST(LM, testvectors) {
+    EXPECT_EQ(LM().digestsize(), (std::size_t) 128);
     hash_test <LM> (LM_TEST_VECTORS);
 }

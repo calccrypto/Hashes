@@ -54,6 +54,8 @@ class HMAC{
         std::string digest(){return h;}
 
         std::string hexdigest(){return hexlify(h);}
+        
+        std::size_t digestsize() const {return H().digestsize();}
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include "Keccak.h"
+#include "KECCAK.h"
 
 // //////////////////////////////////////////////////////////////////////////////////////////
 // KECCAK-p[b, n_r] = base algorithm
@@ -173,7 +173,7 @@ KECCAK_p::StateArray KECCAK_p::Rnd(const KECCAK_p::StateArray & A, const uint64_
     return iota(chi(pirho(theta(A))), rc);
 }
 
-void KECCAK_p::print(const KECCAK_p::StateArray & A) const{
+void KECCAK_p::print(const KECCAK_p::StateArray & A) const {
     for(int y = 0; y < 5; y++){
         for(int x = 0; x < 5; x++){
              std::cout << makehex(A[x][y], 16) << " ";
@@ -278,56 +278,3 @@ std::string KECCAK::operator()(const std::string & M, const unsigned int d){
     return sponge(M, d);
 }
 // //////////////////////////////////////////////////////////////////////////////////////////
-
-// //////////////////////////////////////////////////////////////////////////////////////////
-// template <unsigned int d>
-// SHA3 <d>::SHA3()
-    // : hash(""), KECCAKC(d << 1)
-// {}
-
-// template <unsigned int d>
-// SHA3 <d>::SHA3(const std::string & M)
-    // : SHA32()
-// {
-    // operator()(M);
-// }
-
-// template <unsigned int d>
-// void SHA3 <d>::operator()(const std::string & M){
-    // std::string m = binify(M);
-
-    // // flip bit order for padding
-    // for(unsigned int j = 0; j < m.size(); j+= 8){
-        // for(unsigned int k = 0; k < 4; k++){
-            // std::swap(m[j + k], m[j + 7 - k]);
-        // }
-    // }
-
-    // hash = unbinify(KECCAKC(m + "01", d));
-// }
-
-// template <unsigned int d>
-// std::string SHA3 <d>::digest() const {
-    // return hash;
-// }
-
-// template <unsigned int d>
-// std::string SHA3 <d>::hexdigest() const {
-    // return hexlify(hash);
-// }
-
-// template <const unsigned int d>
-// unsigned int SHA3 <d>::blocksize() const {
-    // return 1600 - (d << 1);
-// }
-
-// template <const unsigned int d>
-// unsigned int SHA3 <d>::digestsize() const {
-    // return d;
-// }
-// //////////////////////////////////////////////////////////////////////////////////////////
-
-// template class SHA3 <256>;
-// template class SHA3 <224>;
-// template class SHA3 <384>;
-// template class SHA3 <512>;

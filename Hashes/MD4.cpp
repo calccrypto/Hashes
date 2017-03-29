@@ -1,6 +1,6 @@
 #include "MD4.h"
 
-void MD4::run(const std::string & data, context & state) const{
+void MD4::run(const std::string & data, context & state) const {
     for(unsigned int i = 0; i < (data.size() >> 6); i++){
         uint32_t a = state.h0, b = state.h1, c = state.h2, d = state.h3;
         std::string W = data.substr(i << 6, 64);
@@ -77,10 +77,10 @@ std::string MD4::hexdigest(){
     return little_end(makehex(out.h0, 8), 16) + little_end(makehex(out.h1, 8), 16) + little_end(makehex(out.h2, 8), 16) + little_end(makehex(out.h3, 8), 16);
 }
 
-std::size_t MD4::blocksize() const{
+std::size_t MD4::blocksize() const {
     return 512;
 }
 
-std::size_t MD4::digestsize() const{
+std::size_t MD4::digestsize() const {
     return 128;
 }

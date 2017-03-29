@@ -32,13 +32,12 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "MerkleDamgard.h"
 
 #include "Keccak_Const.h"
 
 // KECCAK-p[b, n_r] = base algorithm
 // KECCAK-f[b] = KECCAK-p[b, 12 + 2 * l]
-class KECCAK_p {
+class KECCAK_p{
     private:
         unsigned int b,     // width in bits
                      w,     // lane size
@@ -117,25 +116,9 @@ class KECCAK{
         std::string operator()(const std::string & M, const unsigned int d);
 };
 
-// // SHA3-224(M) = KECCAK[448]  (M || 01, 224)
-// // SHA3-256(M) = KECCAK[512]  (M || 01, 256)
-// // SHA3-384(M) = KECCAK[768]  (M || 01, 384)
-// // SHA3-512(M) = KECCAK[1024] (M || 01, 512)
-// template <unsigned int d>
-// class SHA3 : public HashAlg{
-    // private:
-        // std::string hash;
-        // KECCAK KECCAKC;
-
-    // public:
-        // SHA3();
-        // SHA3(const std::string & M);
-
-        // void operator()(const std::string & M);
-        // std::string digest() const;
-        // std::string hexdigest() const;
-        // std::size_t blocksize() const;
-        // std::size_t digestsize() const;
-// };
+// SHA3-224(M) = KECCAK[448]  (M || 01, 224)
+// SHA3-256(M) = KECCAK[512]  (M || 01, 256)
+// SHA3-384(M) = KECCAK[768]  (M || 01, 384)
+// SHA3-512(M) = KECCAK[1024] (M || 01, 512)
 
 #endif
