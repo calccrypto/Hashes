@@ -30,3 +30,7 @@ void LM::run(std::string key){
 std::string LM::hexdigest(){
     return hexlify(data);
 }
+
+std::size_t LM::digestsize() const {
+    return 128;
+}

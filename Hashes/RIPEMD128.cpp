@@ -78,10 +78,10 @@ std::string RIPEMD128::hexdigest(){
     return little_end(makehex(out.h0, 8), 16) + little_end(makehex(out.h1, 8), 16) + little_end(makehex(out.h2, 8), 16) + little_end(makehex(out.h3, 8), 16);
 }
 
-unsigned int RIPEMD128::blocksize() const{
+std::size_t RIPEMD128::blocksize() const{
     return 512;
 }
 
-unsigned int RIPEMD128::digestsize() const{
+std::size_t RIPEMD128::digestsize() const{
     return 128;
 }

@@ -56,10 +56,10 @@ std::string MD2::hexdigest(){
     return hexlify(x.substr(0, 16));
 }
 
-unsigned int MD2::blocksize() const{
+std::size_t MD2::blocksize() const{
     return 128;
 };
 
-unsigned int MD2::digestsize() const{
+std::size_t MD2::digestsize() const{
     return 128;
 };

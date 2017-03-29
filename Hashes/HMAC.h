@@ -38,7 +38,7 @@ class HMAC{
 
     public:
         HMAC(std::string KEY, const std::string & MESSAGE){
-            unsigned int blocksize = algo.blocksize() >> 3;
+            std::size_t blocksize = algo.blocksize() >> 3;
             if (KEY.size() > blocksize)
                 KEY = H(KEY).digest();
             while (KEY.size() < blocksize)

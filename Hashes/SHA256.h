@@ -59,8 +59,8 @@ class SHA256 : public MerkleDamgard{
 
         void update(const std::string &str);
         virtual std::string hexdigest();
-        virtual unsigned int blocksize() const;
-        virtual unsigned int digestsize() const;
+        virtual std::size_t blocksize() const;
+        virtual std::size_t digestsize() const;
 };
 
 #endif

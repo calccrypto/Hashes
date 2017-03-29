@@ -38,6 +38,7 @@ class LM : public HashAlg{
         LM(const std::string & key = "");
         void run(std::string key);
         std::string hexdigest();
+        std::size_t digestsize() const;
 };
 
 #endif

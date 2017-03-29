@@ -167,12 +167,12 @@ std::string SHA3 <d>::hexdigest(){
 }
 
 template <const unsigned int d>
-unsigned int SHA3 <d>::blocksize() const {
+std::size_t SHA3 <d>::blocksize() const {
     return r;
 }
 
 template <const unsigned int d>
-unsigned int SHA3 <d>::digestsize() const {
+std::size_t SHA3 <d>::digestsize() const {
     return d;
 }
 // //////////////////////////////////////////////////////////////////////////////////////////

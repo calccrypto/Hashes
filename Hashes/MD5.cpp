@@ -79,10 +79,10 @@ std::string MD5::hexdigest(){
     return little_end(makehex(tmp.h0, 8)) + little_end(makehex(tmp.h1, 8)) + little_end(makehex(tmp.h2, 8)) + little_end(makehex(tmp.h3, 8));
 }
 
-unsigned int MD5::blocksize() const{
+std::size_t MD5::blocksize() const{
     return 512;
 }
 
-unsigned int MD5::digestsize() const{
+std::size_t MD5::digestsize() const{
     return 128;
 }

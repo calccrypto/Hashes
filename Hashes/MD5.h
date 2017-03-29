@@ -56,8 +56,8 @@ class MD5 : public MerkleDamgard{
         MD5(const std::string & data);
         void update(const std::string & data);
         std::string hexdigest();
-        unsigned int blocksize() const;
-        unsigned int digestsize() const;
+        std::size_t blocksize() const;
+        std::size_t digestsize() const;
 };
 
 #endif

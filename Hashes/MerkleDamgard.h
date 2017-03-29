@@ -37,8 +37,7 @@ class MerkleDamgard : public HashAlg{
         MerkleDamgard();
         virtual ~MerkleDamgard();
         virtual void update(const std::string & str) = 0;
-        virtual unsigned int blocksize() const = 0;  // blocksize in bits
-        virtual unsigned int digestsize() const = 0; // digest size in bits
+        virtual std::size_t blocksize() const = 0;  // blocksize in bits
 };
 
 #endif

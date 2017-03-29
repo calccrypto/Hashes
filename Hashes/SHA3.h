@@ -77,8 +77,8 @@ class SHA3 : public HashAlg{
         void update(const std::string & M);
         std::string digest();
         std::string hexdigest();
-        unsigned int blocksize() const;
-        unsigned int digestsize() const;
+        std::size_t blocksize() const;
+        std::size_t digestsize() const;
 };
 
 #endif

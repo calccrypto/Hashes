@@ -56,8 +56,8 @@ class SHA1 : public MerkleDamgard {
         SHA1(const std::string & str);
         void update(const std::string & str);
         std::string hexdigest();
-        unsigned int blocksize() const;
-        unsigned int digestsize() const;
+        std::size_t blocksize() const;
+        std::size_t digestsize() const;
 };
 
 #endif
