@@ -55,7 +55,7 @@ void SHA256::calc(const std::string &data, context &state) const{
 }
 
 SHA256::SHA256() :
-    HashAlg(),
+    MerkleDamgard(),
     ctx()
 {
     original_h();

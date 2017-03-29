@@ -37,7 +37,7 @@ void MD4::run(const std::string & data, context & state) const{
 }
 
 MD4::MD4():
-    HashAlg(),
+    MerkleDamgard(),
     ctx(0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476)
 {
 }

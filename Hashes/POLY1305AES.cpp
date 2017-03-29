@@ -1,10 +1,11 @@
 #include "POLY1305AES.h"
 
-POLY1305AES::POLY1305AES(const std::string & R, const std::string & NONCE){
-    r = mpz_class(little_end(zfill(hexlify(R), 32, '0').substr(0, 32), 16), 16);
-    nonce = zfill(NONCE, 16, 0).substr(0, 16);
-    mod1305 = mpz_class("3fffffffffffffffffffffffffffffffb", 16);
-}
+const mpz_class POLY1305AES::mod1305("3fffffffffffffffffffffffffffffffb", 16);
+
+POLY1305AES::POLY1305AES(const std::string & R, const std::string & NONCE)
+    : r(mpz_class(little_end(zfill(hexlify(R), 32, '0').substr(0, 32), 16), 16)),
+      nonce(zfill(NONCE, 16, 0).substr(0, 16))
+{}
 
 void POLY1305AES::HASH(const std::string & key, const std::string & message){
     std::string aes = little_end(hexlify(AES(zfill(key, 16, 0).substr(0, 16)).encrypt(nonce)), 16);

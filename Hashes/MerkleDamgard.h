@@ -1,6 +1,6 @@
 /*
-LM.h
-Microsoft's LM hash
+Merkle–Damgård Base type
+Base class for inheritance
 
 Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
@@ -23,21 +23,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __LM__
-#define __LM__
+#ifndef __MERKLE_DAMGARD__
+#define __MERKLE_DAMGARD__
 
-#include "../common/includes.h"
-#include "../Encryptions/DES.h"
 #include "HashAlg.h"
 
-class LM : public HashAlg{
-    private:
-        std::string data;
+class MerkleDamgard : public HashAlg{
+    protected:
+        std::string stack;
+        uint64_t clen;
 
     public:
-        LM(const std::string & key = "");
-        void run(std::string key);
-        std::string hexdigest();
+        MerkleDamgard();
+        virtual ~MerkleDamgard();
+        virtual void update(const std::string & str) = 0;
+        virtual unsigned int blocksize() const = 0;  // blocksize in bits
+        virtual unsigned int digestsize() const = 0; // digest size in bits
 };
 
 #endif

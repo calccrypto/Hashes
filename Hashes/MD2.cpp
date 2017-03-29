@@ -22,6 +22,7 @@ void MD2::process(std::string & x, const std::string & data){
 }
 
 MD2::MD2():
+    MerkleDamgard(),
     L(0),
     C(std::string(16, 0)),
     X(std::string(48, 0))

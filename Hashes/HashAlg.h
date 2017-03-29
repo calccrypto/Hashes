@@ -34,15 +34,8 @@ class HashAlg{
     public:
         HashAlg();
         virtual ~HashAlg();
-        virtual void update(const std::string & str) = 0;
         virtual std::string hexdigest() = 0;
         std::string digest();
-        virtual unsigned int blocksize() const = 0;  // blocksize in bits
-        virtual unsigned int digestsize() const = 0; // digest size in bits
-
-    protected:
-        std::string stack;
-        uint64_t clen;
 };
 
 #endif

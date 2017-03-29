@@ -29,11 +29,11 @@ THE SOFTWARE.
 #include <vector>
 
 #include "../common/includes.h"
-#include "HashAlg.h"
+#include "MerkleDamgard.h"
 
 #include "MD2_Const.h"
 
-class MD2 : public HashAlg{
+class MD2 : public MerkleDamgard{
     private:
         uint8_t L = 0;
         std::string C;

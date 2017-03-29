@@ -38,8 +38,11 @@ class POLY1305AES {
               r[4], r[8], r[12] have to = 0 mod 4
     */
     private:
-        mpz_class r, mod, mod1305;
-        std::string nonce, H;
+        static const mpz_class mod1305;
+
+        const mpz_class r;
+        const std::string nonce;
+        std::string H;
 
     public:
         POLY1305AES(const std::string & R, const std::string & NONCE);

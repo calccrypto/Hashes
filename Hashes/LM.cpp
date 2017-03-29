@@ -1,11 +1,13 @@
 #include "LM.h"
 
-LM::LM(const std::string & key){
+LM::LM(const std::string & key)
+    : HashAlg()
+{
     run(key);
 }
 
 void LM::run(std::string key){
-    for(unsigned int x = 0; x < std::min(key.size(), (size_t) 14); x++){
+    for(unsigned int x = 0; x < std::min(key.size(), (std::string::size_type) 14); x++){
         key[x] = toupper(key[x]);
     }
     while (key.size() < 14){
@@ -27,8 +29,4 @@ void LM::run(std::string key){
 
 std::string LM::hexdigest(){
     return hexlify(data);
-}
-
-std::string LM::digest(){
-    return data;
 }

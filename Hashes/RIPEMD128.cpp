@@ -38,7 +38,7 @@ void RIPEMD128::run(const std::string & data, context & state) const{
 }
 
 RIPEMD128::RIPEMD128(): 
-    HashAlg(),
+    MerkleDamgard(),
     ctx(RIPEMD_H0, RIPEMD_H1, RIPEMD_H2, RIPEMD_H3)
 {
 }

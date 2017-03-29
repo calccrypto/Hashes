@@ -117,7 +117,8 @@ std::string SHA3 <d>::squeeze(std::string & S) const {
 
 template <const unsigned int d>
 SHA3 <d>::SHA3()
-    : b(1600), w(64), l(6), nr(24),
+    : HashAlg(),
+      b(1600), w(64), l(6), nr(24),
       state((size_t) 1600, (char) '0'), stack(""),
       r(1600 - (d << 1))
 {}

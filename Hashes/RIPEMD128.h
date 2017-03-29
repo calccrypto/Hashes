@@ -29,12 +29,12 @@ THE SOFTWARE.
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
-#include "HashAlg.h"
+#include "MerkleDamgard.h"
 
 #include "RIPEMD_Const.h"
 #include "RIPEMD128_Const.h"
 
-class RIPEMD128 : public HashAlg{
+class RIPEMD128 : public MerkleDamgard{
     private:
         struct context{
             uint32_t h0, h1, h2, h3;
@@ -49,7 +49,7 @@ class RIPEMD128 : public HashAlg{
             }
         };
         context ctx;
-        
+
         uint32_t F(const uint32_t & x, const uint32_t & y, const uint32_t & z, const uint8_t round) const;
 
         void run(const std::string & data, context & state) const;

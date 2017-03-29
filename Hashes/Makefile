@@ -11,7 +11,7 @@ all: $(HASHES_OBJECTS)
 
 .PHONY: clean
 
-%.o : %.cpp %.h ../common/cryptomath.h ../common/includes.h 
+%.o : %.cpp %.h ../common/cryptomath.h ../common/includes.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 clean:

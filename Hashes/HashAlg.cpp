@@ -1,14 +1,8 @@
-#include "HashAlg.h"
+#include "MerkleDamgard.h"
 
-HashAlg::HashAlg() :
-    stack(),
-    clen(0)
-{}
+HashAlg::HashAlg(){}
 
-HashAlg::~HashAlg(){
-    stack.clear();
-    clen = 0;
-}
+HashAlg::~HashAlg(){}
 
 std::string HashAlg::digest(){
     return unhexlify(hexdigest());
