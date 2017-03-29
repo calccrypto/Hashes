@@ -1,4 +1,4 @@
-#include "MerkleDamgard.h"
+#include "HashAlg.h"
 
 HashAlg::HashAlg(){}
 
