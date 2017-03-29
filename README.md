@@ -40,7 +40,7 @@ Build:
     g++ -std=c++11 main.cpp common/*.cpp Encryptions/*.cpp Hashes/*.cpp -lgmpxx -lgmp
 
     or some equivalent
-    
+
     Test code and its makefile are included in the test folder.
 
 Usage:
@@ -56,15 +56,13 @@ Usage:
 
 Notes:
     The GNU Multiple Precision Arithmetic Library (GMP) is needed
-    for POly1305-Aes (gmp.org, sudo apt-get install libdev-gmp, or 
+    for POly1305-Aes (gmp.org, sudo apt-get install libdev-gmp, or
     equivalent).
 
-    My Encryptions library is needed for this library. It is included 
-    in this project. My integer library is also needed, but only for 
-    Encryptions mode-of-operation functions, so it is possible to not 
-    need integer.
+    My Encryptions library is needed for this library. It is included
+    in this project.
 
-    The format was inspired by the Python 2.7 hashlib module 
+    The format was inspired by the Python 2.7 hashlib module
 
     Hashes.h provides a quick test to check that the algorithms are correct.
 </pre>
