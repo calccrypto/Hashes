@@ -26,7 +26,7 @@ Hashes:
     SHA-256
     SHA-384
     SHA-512
-    SHA-3 (independent Keccak implementation not active yet)
+    SHA-3 (independent Keccak implementation active, but not sure on correctness)
 
 MACs
     HMAC
