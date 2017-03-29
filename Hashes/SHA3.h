@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include "../common/includes.h"
 #include "HashAlg.h"
 
-#include "Keccak_Const.h"
+#include "KECCAK_Const.h"
 
 template <const unsigned int d>
 class SHA3 : public HashAlg{

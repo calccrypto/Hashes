@@ -33,7 +33,7 @@ THE SOFTWARE.
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
 
-#include "Keccak_Const.h"
+#include "KECCAK_Const.h"
 
 // KECCAK-p[b, n_r] = base algorithm
 // KECCAK-f[b] = KECCAK-p[b, 12 + 2 * l]
