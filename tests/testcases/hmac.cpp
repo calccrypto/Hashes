@@ -6,10 +6,10 @@
 #include "Hashes/SHA256.h"
 #include "Hashes/SHA512.h"
 
-#include "testvectors/hmac/MD5.h"
-#include "testvectors/hmac/SHA1.h"
-#include "testvectors/hmac/SHA256.h"
-#include "testvectors/hmac/SHA512.h"
+#include "testvectors/hmac/md5.h"
+#include "testvectors/hmac/sha1.h"
+#include "testvectors/hmac/sha256.h"
+#include "testvectors/hmac/sha512.h"
 
 TEST(HMAC, MD5) {
     EXPECT_EQ(HMAC <MD5> ("", "").digestsize(), MD5().digestsize());
