@@ -4,8 +4,9 @@ Copyright (c) 2013 - 2017 Jason Lee @ calccrypto at gmail.com
 
 Please see LICENSE file for license.
 
-[![Build Status](https://travis-ci.org/calccrypto/Hashes.svg?branch=master)](https://travis-ci.org/calccrypto/OpenPGP)
+[![Build Status](https://travis-ci.org/calccrypto/Hashes.svg?branch=master)](https://travis-ci.org/calccrypto/Hashes)
 <pre>
+
 IMPORTANT:
     This library was not written for actual use.
     Rather, it was meant for educational purposes,
