@@ -6,9 +6,9 @@ include common/objects.mk
 include Encryptions/objects.mk
 include Hashes/objects.mk
 
-all: $(TARGET)
-
 .PHONY: common Encryptions Hashes clean clean-all
+
+all: $(TARGET)
 
 common:
 	$(MAKE) -C common
