@@ -1,33 +1,32 @@
 # Hashes Library Test Makefile
 CXX?=g++
-CXXFLAGS=-std=c++11 -Wall -g -I../../googletest/googletest/include -I..
-LDFLAGS=-lHashes -lgmp -lgmpxx -L.. -L../../googletest/googlemock/gtest -lgtest -lpthread
+CXXFLAGS=-std=c++11 -Wall -g -D_POSIX_C_SOURCE=200809L -I../../googletest/googletest/include -I..
+LDFLAGS=-lHashes -lgmp -lgmpxx -L.. -L../../googletest/build/lib -lgtest -lgtest_main -lpthread
 TARGET=tests
 
-include testcases/objects.mk
+include objects.mk
 
 debug: CXXFLAGS += -g
 debug: all
 
-.PHONY: lib testcases run clean clean-all
+.PHONY: clean clean-all
 
 all: $(TARGET)
 
-lib:
+../libHashes.a:
 	$(MAKE) -C ..
 
-testcases:
-	$(MAKE) -C testcases
+$(HASHES_TESTCASES_OBJECTS): %.o : %.cpp testvectors/datadigest.h testvectors/keydatadigest.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(TARGET): tests.cpp lib testcases
-	$(CXX) $(CXXFLAGS) tests.cpp $(addprefix testcases/, $(HASHES_TESTCASES_OBJECTS)) $(LDFLAGS) -o $(TARGET)
+$(TARGET): ../libHashes.a $(HASHES_TESTCASES_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(HASHES_TESTCASES_OBJECTS) $(LDFLAGS) -o $(TARGET)
 
-run: $(TARGET)
+test: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(HASHES_TESTCASES_OBJECTS) $(TARGET)
 
 clean-all:  clean
-	$(MAKE) clean -C testcases
 	$(MAKE) clean-all -C ..
