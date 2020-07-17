@@ -13,5 +13,4 @@ HASHES_OBJECTS=HashAlg.o        \
                SHA256.o         \
                SHA2_Functions.o \
                SHA384.o         \
-               SHA512.o         \
-               SHA3.o
+               SHA512.o

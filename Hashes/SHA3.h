@@ -26,9 +26,7 @@ THE SOFTWARE.
 #define __SHA3__
 
 #include <array>
-#include <cmath>
-#include <functional>
-#include <iostream>
+#include <type_traits>
 
 #include "../common/cryptomath.h"
 #include "../common/includes.h"
@@ -36,7 +34,7 @@ THE SOFTWARE.
 
 #include "KECCAK_Const.h"
 
-template <const unsigned int d>
+template <const unsigned int d, typename = typename std::enable_if <d % 8 == 0>::type>
 class SHA3 : public HashAlg{
     private:
         const unsigned int b,     // width in bits (1600)
@@ -80,5 +78,7 @@ class SHA3 : public HashAlg{
         std::size_t blocksize() const;
         std::size_t digestsize() const;
 };
+
+#include "SHA3.tpp"
 
 #endif
