@@ -1,7 +1,7 @@
 // //////////////////////////////////////////////////////////////////////////////////////////
 template <const unsigned int d, typename Valid>
 typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::s2sa(const std::string & S) const {
-    SHA3 <d, Valid>::StateArray A = {{0}};
+    typename SHA3 <d, Valid>::StateArray A = {{0}};
     for(uint8_t y = 0; y < 5; y++) {
         for(uint8_t x = 0; x < 5; x++) {
             A[x][y] = toint(little_end(S.substr(w * (5 * y + x), w), 2), 2);
@@ -24,7 +24,7 @@ std::string SHA3 <d, Valid>::sa2s(const typename SHA3 <d, Valid>::StateArray & A
 
 template <const unsigned int d, typename Valid>
 typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::theta(const typename SHA3 <d, Valid>::StateArray & A) const {
-    SHA3 <d, Valid>::StateArray Aprime = A;
+    typename SHA3 <d, Valid>::StateArray Aprime = A;
 
     // step 1
     std::array <uint64_t, 5> C;
@@ -48,7 +48,7 @@ typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::theta(const typename SHA3 
 
 template <const unsigned int d, typename Valid>
 typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::pirho(const typename SHA3 <d, Valid>::StateArray & A) const {
-    SHA3 <d, Valid>::StateArray Aprime;
+    typename SHA3 <d, Valid>::StateArray Aprime;
     for(uint8_t x = 0; x < 5; x++) {
         for(uint8_t y = 0; y < 5; y++) {
             Aprime[y][(2 * x + 3 * y) % 5] = ROL(A[x][y], Keccak_rot[x][y], 64);
@@ -59,7 +59,7 @@ typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::pirho(const typename SHA3 
 
 template <const unsigned int d, typename Valid>
 typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::chi(const typename SHA3 <d, Valid>::StateArray & A) const {
-    SHA3 <d, Valid>::StateArray Aprime = A;
+    typename SHA3 <d, Valid>::StateArray Aprime = A;
     for(uint8_t x = 0; x < 5; x++) {
         for(uint8_t y = 0; y < 5;  y++) {
             Aprime[x][y] = A[x][y] ^ ((~A[(x + 1) % 5][y]) & A[(x + 2) % 5][y]);
@@ -70,7 +70,7 @@ typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::chi(const typename SHA3 <d
 
 template <const unsigned int d, typename Valid>
 typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::iota(const typename SHA3 <d, Valid>::StateArray & A, const uint64_t rc) const {
-    SHA3 <d, Valid>::StateArray Aprime = A;
+    typename SHA3 <d, Valid>::StateArray Aprime = A;
     Aprime[0][0] ^= rc;
     return Aprime;
 }
@@ -78,7 +78,7 @@ typename SHA3 <d, Valid>::StateArray SHA3 <d, Valid>::iota(const typename SHA3 <
 // assumes S is already in binary
 template <const unsigned int d, typename Valid>
 typename std::string SHA3 <d, Valid>::f(const std::string & S) const {
-    SHA3 <d, Valid>::StateArray A = s2sa(S);
+    typename SHA3 <d, Valid>::StateArray A = s2sa(S);
 
     for(unsigned int i = 0; i < nr; i++) {
         A = iota(chi(pirho(theta(A))), Keccak_RC[i]);
